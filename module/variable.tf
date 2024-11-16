@@ -28,6 +28,26 @@ variable "automatic_upgrade_channel" {
   type = string
 }
 
+variable "cluster_sku_tier" {
+  type = string
+  default = "Free"
+}
+
+variable "private_cluster_enabled" {
+  type = bool
+  default = false
+}
+
+variable "workload_identity_enabled" {
+  type = bool
+  default = true
+}
+
+variable "role_based_access_control_enabled" {
+  type = bool
+  default = true
+}
+
 ######### Node group variable ##########
 
 variable "node_pool_name" {
@@ -50,8 +70,8 @@ variable "node_os_disk_type" {
 }
 
 variable "node_os_disk_size_gb" {
-  type = string
-  default = "10gb"
+  type = number
+  default = 10
 }
 
 variable "node_vm_size" {
@@ -73,11 +93,11 @@ variable "node_count" {
 }
 
 variable "max_node_count" {
-  type = string
+  type = number
 }
 
 variable "min_node_count" {
-  type = string
+  type = number
 }
 
 variable "node_labels" {
@@ -95,5 +115,7 @@ variable "pod_subnet_id" {
 
 variable "temporary_name_for_rotation" {
   type = string
-  default = "tmp-node-pool"
+  default = "tmpnodepool"
 }
+
+

@@ -1,19 +1,24 @@
 module "aks_cluster" {
 
-  source                    = "./module"
-  cluster_name              = "simulator-aks"
-  cluster_location          = "South India"
-  rg_name                   = "simulator-rg"
-  dns_prefix                = "simulatoraks"
-  kubernetes_version        = "1.29.9"
-  automatic_upgrade_channel = "node-image"
-  node_pool_name            = "simulator-aks-default-node-pool"
-  node_os_disk_size_gb      = "10gb"
-  node_vm_size              = "Standard_D2s_v3"
-  auto_scaling_enabled      = true
-  min_node_count            = "1"
-  max_node_count            = "1"
-  node_count                = "1"
+  source                            = "./module"
+  cluster_name                      = "simulator-aks"
+  cluster_location                  = "South India"
+  rg_name                           = "simulator-rg"
+  dns_prefix                        = "simulatoraks"
+  kubernetes_version                = "1.29.9"
+  automatic_upgrade_channel         = "node-image"
+  cluster_sku_tier                  = "Free"
+  private_cluster_enabled           = false
+  workload_identity_enabled         = true
+  role_based_access_control_enabled = true
+
+  node_pool_name       = "simnodepool"
+  node_os_disk_size_gb = 10
+  node_vm_size         = "Standard_D2s_v3"
+  auto_scaling_enabled = true
+  min_node_count       = 1
+  max_node_count       = 1
+  node_count           = 1
   node_labels = {
     "Environment" = "demo"
   }

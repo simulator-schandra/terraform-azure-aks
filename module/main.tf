@@ -29,8 +29,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
     )
 
     auto_scaling_enabled = var.auto_scaling_enabled
-    max_count            = var.max_node_count ? var.auto_scaling_enabled == true : null
-    min_count            = var.min_node_count ? var.auto_scaling_enabled == true : null
+    max_count            = var.auto_scaling_enabled == true ? var.max_node_count : null
+    min_count            = var.auto_scaling_enabled == true ? var.min_node_count : null
     node_count           = var.node_count
     max_pods             = var.max_pods
 
@@ -42,8 +42,12 @@ resource "azurerm_kubernetes_cluster" "aks" {
     type = "SystemAssigned"
   }
 
-  kubernetes_version        = var.kubernetes_version
-  automatic_upgrade_channel = var.automatic_upgrade_channel
+  kubernetes_version                = var.kubernetes_version
+  automatic_upgrade_channel         = var.automatic_upgrade_channel
+  private_cluster_enabled           = var.private_cluster_enabled
+  workload_identity_enabled         = var.workload_identity_enabled
+  role_based_access_control_enabled = var.role_based_access_control_enabled
+  sku_tier                          = var.cluster_sku_tier
 
   tags = merge(
     {
