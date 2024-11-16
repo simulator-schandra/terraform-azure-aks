@@ -15,7 +15,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
     node_labels = merge(
       {
-        "Node Pool" = var.node_pool_name
+        "Nodepool" = var.node_pool_name
       },
       var.node_labels
     )
@@ -35,6 +35,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     max_pods             = var.max_pods
 
     pod_subnet_id               = var.pod_subnet_id
+    vnet_subnet_id              = var.node_pool_subnet_id
     temporary_name_for_rotation = var.temporary_name_for_rotation
   }
 

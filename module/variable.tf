@@ -65,12 +65,12 @@ variable "network_policy" {
 
 variable "dns_service_ip" {
   type    = string
-  default = "172.31.0.5"
+  default = "192.168.0.5"
 }
 
 variable "service_cidr" {
   type    = string
-  default = "172.31.0.0/16"
+  default = "192.168.0.0/16"
 }
 
 variable "ip_versions" {
@@ -101,7 +101,7 @@ variable "node_os_disk_type" {
 
 variable "node_os_disk_size_gb" {
   type    = number
-  default = 10
+  default = 30
 }
 
 variable "node_vm_size" {
@@ -140,6 +140,10 @@ variable "max_pods" {
 }
 
 variable "pod_subnet_id" {
+  type = string
+}
+
+variable "node_pool_subnet_id" {
   type = string
 }
 

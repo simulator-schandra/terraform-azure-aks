@@ -15,12 +15,12 @@ module "aks_cluster" {
 
   network_plugin = "azure"
   network_policy = "azure"
-  dns_service_ip = "172.31.0.5"
-  service_cidr   = "172.31.0.0/16"
+  dns_service_ip = "192.168.0.5"
+  service_cidr   = "192.168.0.0/16"
   ip_versions    = ["IPv4"]
 
   node_pool_name       = "simnodepool"
-  node_os_disk_size_gb = 10
+  node_os_disk_size_gb = 30
   node_vm_size         = "Standard_D2s_v3"
   auto_scaling_enabled = true
   min_node_count       = 1
@@ -29,7 +29,8 @@ module "aks_cluster" {
   node_labels = {
     "Environment" = "demo"
   }
-  pod_subnet_id = "/subscriptions/d13e065d-de62-4283-8742-8aa75745e71d/resourceGroups/simulator-rg/providers/Microsoft.Network/virtualNetworks/simulator-vnet/subnets/simulator-sub-pvt-1"
+  pod_subnet_id       = "/subscriptions/d13e065d-de62-4283-8742-8aa75745e71d/resourceGroups/simulator-rg/providers/Microsoft.Network/virtualNetworks/simulator-vnet/subnets/simulator-sub-pvt-1"
+  node_pool_subnet_id = "/subscriptions/d13e065d-de62-4283-8742-8aa75745e71d/resourceGroups/simulator-rg/providers/Microsoft.Network/virtualNetworks/simulator-vnet/subnets/simulator-sub-pvt-2"
   tags = {
     "Environment" = "demo"
   }
