@@ -11,6 +11,13 @@ module "aks_cluster" {
   private_cluster_enabled           = false
   workload_identity_enabled         = true
   role_based_access_control_enabled = true
+  oidc_issuer_enabled               = true
+
+  network_plugin = "azure"
+  network_policy = "azure"
+  dns_service_ip = "172.31.0.5"
+  service_cidr   = "172.31.0.0/16"
+  ip_versions    = ["IPv4"]
 
   node_pool_name       = "simnodepool"
   node_os_disk_size_gb = 10

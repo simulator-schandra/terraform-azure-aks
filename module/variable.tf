@@ -29,23 +29,53 @@ variable "automatic_upgrade_channel" {
 }
 
 variable "cluster_sku_tier" {
-  type = string
+  type    = string
   default = "Free"
 }
 
 variable "private_cluster_enabled" {
-  type = bool
+  type    = bool
   default = false
 }
 
 variable "workload_identity_enabled" {
-  type = bool
+  type    = bool
   default = true
 }
 
 variable "role_based_access_control_enabled" {
-  type = bool
+  type    = bool
   default = true
+}
+
+variable "oidc_issuer_enabled" {
+  type    = bool
+  default = true
+}
+
+variable "network_plugin" {
+  type    = string
+  default = "azure"
+}
+
+variable "network_policy" {
+  type    = string
+  default = "azure"
+}
+
+variable "dns_service_ip" {
+  type    = string
+  default = "172.31.0.5"
+}
+
+variable "service_cidr" {
+  type    = string
+  default = "172.31.0.0/16"
+}
+
+variable "ip_versions" {
+  type    = list(string)
+  default = ["IPv4"]
 }
 
 ######### Node group variable ##########
@@ -60,17 +90,17 @@ variable "node_pool_type" {
 }
 
 variable "node_os_sku" {
-  type = string
+  type    = string
   default = "Ubuntu"
 }
 
 variable "node_os_disk_type" {
-  type = string
+  type    = string
   default = "Managed"
 }
 
 variable "node_os_disk_size_gb" {
-  type = number
+  type    = number
   default = 10
 }
 
@@ -79,7 +109,7 @@ variable "node_vm_size" {
 }
 
 variable "host_encryption_enabled" {
-  type = bool
+  type    = bool
   default = true
 }
 
@@ -105,7 +135,7 @@ variable "node_labels" {
 }
 
 variable "max_pods" {
-  type = number
+  type    = number
   default = 100
 }
 
@@ -114,7 +144,7 @@ variable "pod_subnet_id" {
 }
 
 variable "temporary_name_for_rotation" {
-  type = string
+  type    = string
   default = "tmpnodepool"
 }
 

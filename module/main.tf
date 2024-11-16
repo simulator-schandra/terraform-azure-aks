@@ -48,6 +48,15 @@ resource "azurerm_kubernetes_cluster" "aks" {
   workload_identity_enabled         = var.workload_identity_enabled
   role_based_access_control_enabled = var.role_based_access_control_enabled
   sku_tier                          = var.cluster_sku_tier
+  oidc_issuer_enabled               = var.oidc_issuer_enabled
+
+  network_profile {
+    network_plugin = var.network_plugin
+    network_policy = var.network_policy
+    dns_service_ip = var.dns_service_ip
+    service_cidr   = var.service_cidr
+    ip_versions    = var.ip_versions
+  }
 
   tags = merge(
     {
