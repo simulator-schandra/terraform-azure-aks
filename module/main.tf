@@ -34,7 +34,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
     node_count           = var.node_count
     max_pods             = var.max_pods
 
-    pod_subnet_id = var.pod_subnet_id
+    pod_subnet_id               = var.pod_subnet_id
+    temporary_name_for_rotation = var.temporary_name_for_rotation
   }
 
   identity {

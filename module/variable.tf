@@ -69,7 +69,7 @@ variable "auto_scaling_enabled" {
 }
 
 variable "node_count" {
-  type = number
+  type = string
 }
 
 variable "max_node_count" {
@@ -86,9 +86,14 @@ variable "node_labels" {
 
 variable "max_pods" {
   type = number
+  default = 100
 }
 
 variable "pod_subnet_id" {
   type = string
 }
 
+variable "temporary_name_for_rotation" {
+  type = string
+  default = "tmp-node-pool"
+}
