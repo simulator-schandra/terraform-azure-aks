@@ -10,9 +10,9 @@ module "aks_cluster" {
   node_pool_name            = "simulator-aks-default-node-pool"
   node_os_disk_size_gb      = "10gb"
   node_vm_size              = "Standard_D2s_v3"
-  auto_scaling_enabled = true
-  min_node_count = "1"
-  max_node_count = "1"
+  auto_scaling_enabled      = true
+  min_node_count            = "1"
+  max_node_count            = "1"
   node_count                = "1"
   node_labels = {
     "Environment" = "demo"
