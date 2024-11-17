@@ -75,7 +75,8 @@ module "aks_cluster" {
 
 ```
 
-## Inputs
+Inputs
+------
 
 
 | Name | Description | Type | Default | Required |
@@ -111,8 +112,13 @@ module "aks_cluster" {
 | <a name="input_tags"></a> [tags](#input_tags) | Tags to be applied to the AKS cluster resources | `map(string)` | <pre>{<br>  "Environment": "demo"<br>}</pre> | no |
 
 
-## Outputs
+Outputs
+--------
 
+| Name | Description |
+|------|-------------|
+| <a name="output_vnet_address_space"></a> [vnet\_address\_space](#output\_vnet\_address\_space) | The address space of the newly created vNet |
+| <a name="output_vnet_guid"></a> [vnet\_guid](#output\_vnet\_guid) | The GUID of the newly created vNet |
 
 Revision History 
 ----------------
