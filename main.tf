@@ -29,8 +29,8 @@ module "aks_cluster" {
   node_labels = {
     "Environment" = "demo"
   }
-  pod_subnet_id       = "/subscriptions/d13e065d-de62-4283-8742-8aa75745e71d/resourceGroups/simulator-rg/providers/Microsoft.Network/virtualNetworks/simulator-vnet/subnets/simulator-sub-pvt-1"
-  node_pool_subnet_id = "/subscriptions/d13e065d-de62-4283-8742-8aa75745e71d/resourceGroups/simulator-rg/providers/Microsoft.Network/virtualNetworks/simulator-vnet/subnets/simulator-sub-pvt-2"
+  pod_subnet_id       = "simulator-sub-pvt-1"
+  node_pool_subnet_id = "simulator-sub-pvt-2"
   tags = {
     "Environment" = "demo"
   }
