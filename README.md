@@ -119,4 +119,4 @@ Revision History
 
 ### Contributors
 
-- Originally created by [Suyash Chandra](https://github.com/suyash1610)
+- Created by [Suyash Chandra](https://github.com/suyash1610)
