@@ -1,37 +1,69 @@
-module "aks_cluster" {
+resource "azurerm_kubernetes_cluster" "aks" {
+  name                = var.cluster_name
+  location            = var.cluster_location
+  resource_group_name = var.rg_name
+  dns_prefix          = var.dns_prefix
 
-  source                            = "./module"
-  cluster_name                      = "simulator-aks"
-  cluster_location                  = "South India"
-  rg_name                           = "simulator-rg"
-  dns_prefix                        = "simulatoraks"
-  kubernetes_version                = "1.29.9"
-  automatic_upgrade_channel         = "node-image"
-  cluster_sku_tier                  = "Free"
-  private_cluster_enabled           = false
-  workload_identity_enabled         = true
-  role_based_access_control_enabled = true
-  oidc_issuer_enabled               = true
+  default_node_pool {
+    name                    = var.node_pool_name
+    type                    = var.node_pool_type
+    os_sku                  = var.node_os_sku
+    os_disk_type            = var.node_os_disk_type
+    os_disk_size_gb         = var.node_os_disk_size_gb
+    vm_size                 = var.node_vm_size
+    host_encryption_enabled = var.host_encryption_enabled
 
-  network_plugin = "azure"
-  network_policy = "azure"
-  dns_service_ip = "192.168.0.5"
-  service_cidr   = "192.168.0.0/16"
-  ip_versions    = ["IPv4"]
+    node_labels = merge(
+      {
+        "Nodepool" = var.node_pool_name
+      },
+      var.node_labels
+    )
 
-  node_pool_name       = "simnodepool"
-  node_os_disk_size_gb = 30
-  node_vm_size         = "Standard_D2s_v3"
-  auto_scaling_enabled = true
-  min_node_count       = 1
-  max_node_count       = 1
-  node_count           = 1
-  node_labels = {
-    "Environment" = "demo"
+    tags = merge(
+      {
+        Name        = var.node_pool_name
+        Provisioner = "Terraform"
+      },
+      var.tags
+    )
+
+    auto_scaling_enabled = var.auto_scaling_enabled
+    max_count            = var.auto_scaling_enabled == true ? var.max_node_count : null
+    min_count            = var.auto_scaling_enabled == true ? var.min_node_count : null
+    node_count           = var.node_count
+    max_pods             = var.max_pods
+
+    pod_subnet_id               = var.pod_subnet_id
+    vnet_subnet_id              = var.node_pool_subnet_id
+    temporary_name_for_rotation = var.temporary_name_for_rotation
   }
-  pod_subnet_id       = "simulator-sub-pvt-1"
-  node_pool_subnet_id = "simulator-sub-pvt-2"
-  tags = {
-    "Environment" = "demo"
+
+  identity {
+    type = "SystemAssigned"
   }
+
+  kubernetes_version                = var.kubernetes_version
+  automatic_upgrade_channel         = var.automatic_upgrade_channel
+  private_cluster_enabled           = var.private_cluster_enabled
+  workload_identity_enabled         = var.workload_identity_enabled
+  role_based_access_control_enabled = var.role_based_access_control_enabled
+  sku_tier                          = var.cluster_sku_tier
+  oidc_issuer_enabled               = var.oidc_issuer_enabled
+
+  network_profile {
+    network_plugin = var.network_plugin
+    network_policy = var.network_policy
+    dns_service_ip = var.dns_service_ip
+    service_cidr   = var.service_cidr
+    ip_versions    = var.ip_versions
+  }
+
+  tags = merge(
+    {
+      Name        = var.cluster_name
+      Provisioner = "Terraform"
+    },
+    var.tags
+  )
 }
